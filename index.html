@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pomodoro 🍅</title>
+  <meta name="description" content="Temporizador Pomodoro con lista de tareas y estadísticas.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍅</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-mode="focus">
+  <main class="app">
+    <header>
+      <h1><span class="tomato" aria-hidden="true">🍅</span> Pomodoro</h1>
+      <button id="notifBtn" class="ghost" type="button">🔔 Activar avisos</button>
+    </header>
+
+    <section class="card timer-card">
+      <div class="tabs" role="tablist" aria-label="Modo">
+        <button role="tab" data-mode="focus" class="active" aria-selected="true">Enfoque</button>
+        <button role="tab" data-mode="short" aria-selected="false">Descanso corto</button>
+        <button role="tab" data-mode="long" aria-selected="false">Descanso largo</button>
+      </div>
+
+      <div class="dial" id="dial">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <circle class="track" cx="100" cy="100" r="90"/>
+          <circle class="progress" id="progress" cx="100" cy="100" r="90"/>
+        </svg>
+        <div class="dial-text">
+          <div id="time" class="time" role="timer" aria-live="off">25:00</div>
+          <div id="label" class="label">¡Hora de enfocarse!</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="startBtn" class="primary" type="button">Iniciar</button>
+        <button id="resetBtn" class="ghost" type="button">Reiniciar</button>
+        <button id="skipBtn" class="ghost" type="button">Saltar ⏭</button>
+      </div>
+
+      <div class="cycle" id="cycle" aria-label="Ciclo actual"></div>
+      <p class="current-task" id="currentTask"></p>
+    </section>
+
+    <section class="card">
+      <h2>Estadísticas</h2>
+      <div class="stats">
+        <div><strong id="statToday">0</strong><span>Hoy</span></div>
+        <div><strong id="statWeek">0</strong><span>Últimos 7 días</span></div>
+        <div><strong id="statTotal">0</strong><span>Total</span></div>
+        <div><strong id="statMinutes">0</strong><span>Min. enfocado hoy</span></div>
+      </div>
+      <div class="bars" id="bars" aria-label="Pomodoros por día"></div>
+    </section>
+
+    <section class="card">
+      <h2>Tareas</h2>
+      <form id="taskForm" autocomplete="off">
+        <input id="taskInput" type="text" placeholder="¿En qué vas a trabajar?" maxlength="120" aria-label="Nueva tarea" required>
+        <button class="primary" type="submit">Añadir</button>
+      </form>
+      <ul id="taskList" class="tasks"></ul>
+      <button id="clearDone" class="ghost small" type="button">Borrar completadas</button>
+    </section>
+
+    <footer>
+      <label class="toggle"><input type="checkbox" id="soundToggle" checked> Sonido</label>
+      <span>Atajo: <kbd>Espacio</kbd> iniciar/pausar</span>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
